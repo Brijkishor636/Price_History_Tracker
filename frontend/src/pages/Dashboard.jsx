@@ -1,19 +1,40 @@
-import { signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebaseConfigurations/config";
 import { useNavigate } from "react-router-dom";
 
-export default function Dashboard(){
+export default function Dashboard() {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-    async function logout(){
-        await signOut(auth);
-        navigate("/");
-    }
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (!currentUser) navigate("/");
+      setUser(currentUser);
+    });
 
-    return <div className="text-xl font-bold p-10">
-        <div>
-            <p>email :- {auth.currentUser.email}</p>
-        </div>
-        <button onClick={logout} className="px-4 mt-4 py-2 rounded-lg bg-gray-600 cursor-pointer text-white font-medium">logout</button>
+    return () => unsubscribe();
+  }, [navigate]);
+
+  async function logout() {
+    await signOut(auth);
+  }
+
+  return (
+    <div className="text-xl font-bold p-10">
+      {user ? (
+        <>
+          <p>email :- {user.email}</p>
+          <button
+            onClick={logout}
+            className="px-4 mt-4 py-2 rounded-lg bg-gray-600 cursor-pointer text-white font-medium"
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <p>Loading user...</p>
+      )}
     </div>
+  );
 }
