@@ -1,1 +1,1 @@
-{"root":["./prisma/seed.ts","./src/index.ts","./src/input.ts","./src/controller/productcontroller.ts","./src/controller/usercontroller.ts","./src/routes/product.ts","./src/routes/user.ts"],"errors":true,"version":"5.7.3"}
+{"root":["./prisma/seed.ts","./src/index.ts","./src/input.ts","./src/controller/productcontroller.ts","./src/controller/usercontroller.ts","./src/middlewares/authmiddleware.ts","./src/routes/product.ts","./src/routes/user.ts"],"errors":true,"version":"5.7.3"}

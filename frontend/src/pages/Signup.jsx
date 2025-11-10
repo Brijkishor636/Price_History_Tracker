@@ -1,13 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Home/Footer";
 import Navbar from "../components/Home/Navbar";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../firebaseConfigurations/config";
 
 export default function Signup() {
+
+  const navigate = useNavigate();
+  async function signIn(){
+    await signInWithPopup(auth, googleProvider);
+    navigate("/dashboard");
+  }
+
 return ( <div className="flex flex-col min-h-screen w-full"> <Navbar /> <div className="flex-grow flex items-center justify-center py-10"> <form className="md:w-96 w-80 flex flex-col items-center justify-center p-5 px-10 rounded-lg bg-linear-to-br from-pink-50 to-blue-100"> <h2 className="text-4xl text-gray-900 font-medium">Sign up</h2> <p className="text-sm text-gray-500/90 mt-3">
 Create your account to start tracking prices </p>
 
       {/* Google Signup */}
-      <button
+      <button onClick={signIn}
         type="button"
         className="w-full mt-8 bg-gray-500/10 flex items-center justify-center h-12 rounded-full"
       >

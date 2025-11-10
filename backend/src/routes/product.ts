@@ -1,8 +1,9 @@
 import express, { Request, Response} from "express";
 import { productFind } from "../controller/productController";
+import { verifyToken } from "../middlewares/authMiddleware";
 
 const productRouter = express.Router();
 
-productRouter.post("/", (req: Request, res: Response)=>productFind(req, res));
+productRouter.post("/", verifyToken, (req: Request, res: Response)=>productFind(req, res));
 
 export default productRouter;

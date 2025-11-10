@@ -1,8 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Home/Footer";
 import Navbar from "../components/Home/Navbar";
+import { auth, googleProvider } from "../firebaseConfigurations/config";
+import { signInWithPopup } from "firebase/auth";
 
 export default function Login() {
+
+    const navigate = useNavigate();
+    async function signIn(){
+        await signInWithPopup(auth, googleProvider);
+        navigate("/dashboard");
+    }
+
     return (
         <div className="flex flex-col h-[700px] w-full">
             <Navbar/>
@@ -12,7 +21,7 @@ export default function Login() {
                     <h2 className="text-4xl text-gray-900 font-medium">Sign in</h2>
                     <p className="text-sm text-gray-500/90 mt-3">Welcome back! Please sign in to continue</p>
         
-                    <button type="button" className="w-full mt-8 bg-gray-500/10 flex items-center justify-center h-12 rounded-full">
+                    <button onClick={signIn} type="button" className="w-full cursor-pointer mt-8 bg-gray-500/10 flex items-center justify-center h-12 rounded-full">
                         <img src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/login/googleLogo.svg" alt="googleLogo" />
                     </button>
         
