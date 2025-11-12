@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "../../assets/img_bg3.png";
+import logo from "../assets/img_bg3.png";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
 const [isOpen, setIsOpen] = useState(false);
 const navigate = useNavigate();
 
-return ( <nav className="sticky top-0 left-0 w-full bg-linear-to-r from-purple-600 via-indigo-600 to-blue-600 text-white shadow-lg z-50"> <div className="max-w-7xl mx-auto px-5 sm:px-8 flex justify-between items-center py-3">
+return ( <nav className="sticky top-0 left-0 w-full bg-linear-to-r from-purple-800 via-indigo-800 to-blue-800 text-white shadow-lg z-50"> <div className="max-w-7xl mx-auto px-5 sm:px-8 flex justify-between items-center py-3">
 <Link to={"/"} className="flex items-center gap-2"> <img src={logo} alt="logo" className="w-7 h-7" /> <span className="font-bold text-lg tracking-wide">Price Tracker</span> </Link>
 
     <div className="hidden md:flex items-center gap-8">

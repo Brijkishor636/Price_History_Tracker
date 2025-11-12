@@ -1,15 +1,17 @@
 
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
-return ( <footer className="bg-linear-to-r from-purple-600 via-indigo-600 to-blue-600 text-white mt-10"> <div className="max-w-7xl mx-auto px-5 sm:px-8 py-10 flex flex-col md:flex-row justify-between gap-10">
-{/* About Section */} <div className="flex flex-col gap-3"> <h2 className="text-xl font-bold">PriceTracker</h2> <p className="text-sm text-white/80 max-w-xs">
+return ( <footer className="bg-linear-to-r from-purple-900 via-indigo-900 to-blue-900 text-white"> 
+<div className="max-w-7xl mx-auto px-5 sm:px-8 py-10 flex flex-col md:flex-row justify-between gap-10">
+<div className="flex flex-col gap-3"> <h2 className="text-xl font-bold">PriceTracker</h2> <p className="text-sm text-white/80 max-w-xs">
 Track price history from Flipkart, Amazon, and other stores easily. Get alerts and find the best deals in real time. </p> </div>
 
     {/* Links Section */}
     <div className="flex flex-col gap-2">
       <h3 className="font-semibold">Quick Links</h3>
-      <a href="#" className="hover:text-blue-200 transition">Home</a>
+      <Link to={"/"} className="hover:text-blue-200 transition">Home</Link>
       <a href="#" className="hover:text-blue-200 transition">Track Prices</a>
       <a href="#" className="hover:text-blue-200 transition">Pricing</a>
       <a href="#" className="hover:text-blue-200 transition">Contact</a>

@@ -7,7 +7,7 @@ exports.verifyToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const verifyToken = (req, res, next) => {
     let token = req.cookies.token;
-    console.log(token);
+    // console.log(token);
     if (!token) {
         return res.status(403).json({
             msg: "no token, Autorization denied!!"

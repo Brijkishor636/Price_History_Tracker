@@ -1,10 +1,8 @@
-import FetchApi from "../components/FetchApi/FetchApi";
-import Footer from "../components/Home/Footer";
-import Navbar from "../components/Home/Navbar";
+
+import VivoPriceTracker from "../components/VivoPriceTracker";
 
 export default function Home(){
     return <div>
-        <Navbar />
-        <Footer />
+        Hi there from home page
     </div>
 }

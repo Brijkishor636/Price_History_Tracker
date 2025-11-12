@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebaseConfigurations/config";
 import { useNavigate } from "react-router-dom";
+import VivoPriceTracker from "../components/VivoPriceTracker";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -21,6 +22,12 @@ export default function Dashboard() {
   }
 
   return (
+      <div>
+        <div>
+          <VivoPriceTracker />
+        </div>
+
+
     <div className="text-xl font-bold p-10">
       {user ? (
         <>
@@ -35,6 +42,7 @@ export default function Dashboard() {
       ) : (
         <p>Loading user...</p>
       )}
+    </div>
     </div>
   );
 }

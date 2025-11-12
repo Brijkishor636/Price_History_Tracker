@@ -13,7 +13,7 @@ const PriceAlert = ({ currentPrice }) => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-950 to-slate-900 rounded-2xl shadow-xl p-6 border border-blue-800">
+    <div className="bg-linear-to-r from-blue-950 to-slate-900 rounded-2xl shadow-xl p-6 border border-blue-800">
       <h2 className="text-2xl font-bold text-white mb-4">Set Price Alert</h2>
       <p className="text-gray-400 mb-6">
         Get notified when the price drops below your target. We'll send you an email alert.
