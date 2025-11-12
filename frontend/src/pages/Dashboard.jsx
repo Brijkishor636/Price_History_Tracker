@@ -8,14 +8,13 @@ export default function Dashboard() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser) navigate("/");
-      setUser(currentUser);
-    });
-
-    return () => unsubscribe();
-  }, [navigate]);
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     if (!currentUser) navigate("/");
+  //     setUser(currentUser);
+  //   });
+  //   return () => unsubscribe();
+  // }, [navigate]);
 
   async function logout() {
     await signOut(auth);
