@@ -1,4 +1,5 @@
 
+import AboutSection from "../components/Home/AboutSection";
 import ActionSection from "../components/Home/ActionSection";
 import MainDealsAndDrops from "../components/Home/MainDealsandDrops";
 import SearchBar from "../components/Home/SearchBar";
@@ -13,6 +14,7 @@ export default function Home(){
             <MainDealsAndDrops />
             <TestimonialSection />
             <ActionSection />
+            <AboutSection />
         </div>
     </div>
 }
