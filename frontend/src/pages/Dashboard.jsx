@@ -26,7 +26,6 @@ export default function Dashboard() {
           <VivoPriceTracker />
         </div>
 
-
     <div className="text-xl font-bold p-10">
       {user ? (
         <>

@@ -59,7 +59,7 @@ const VivoPriceTracker = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full flex justify-center items-start bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-10 px-4 sm:px-8">
+    <div className="min-h-screen w-full flex justify-center items-start bg-linear-to-br from-slate-900 via-blue-900 to-slate-900 py-10 px-4 sm:px-8">
       <div className="w-full mx-auto space-y-6">
         <Header />
 

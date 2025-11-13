@@ -33,7 +33,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             }
         });
         if (existUser) {
-            return res.status(402).json({
+            return res.status(404).json({
                 msg: "User already exists, please login"
             });
         }
@@ -51,7 +51,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             httpOnly: true,
             path: "/"
         });
-        return res.status(200).json({
+        return res.status(201).json({
             msg: "User created successfully..",
             token
         });
@@ -79,7 +79,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             }
         });
         if (!user) {
-            return res.status(404).json({
+            return res.status(400).json({
                 msg: "User not found!!"
             });
         }
