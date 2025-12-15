@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signin = exports.signup = void 0;
+exports.logOut = exports.currentUser = exports.signin = exports.signup = void 0;
 const input_1 = require("../input");
 const client_1 = require("@prisma/client");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
@@ -49,11 +49,12 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const token = jsonwebtoken_1.default.sign({ userId: user.id }, secret, { expiresIn: '1h' });
         res.cookie("token", token, {
             httpOnly: true,
-            path: "/"
+            secure: false,
+            sameSite: "lax",
+            maxAge: 24 * 60 * 60 * 1000,
         });
         return res.status(201).json({
             msg: "User created successfully..",
-            token
         });
     }
     catch (e) {
@@ -97,11 +98,12 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const token = jsonwebtoken_1.default.sign({ userId: userId }, secretKey, { expiresIn: "1h" });
         res.cookie("token", token, {
             httpOnly: true,
-            path: '/'
+            secure: false,
+            sameSite: "lax",
+            maxAge: 24 * 60 * 60 * 1000,
         });
         return res.status(200).json({
             msg: "Login successfully..",
-            token
         });
     }
     catch (e) {
@@ -112,3 +114,55 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.signin = signin;
+const currentUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const token = req.cookies.token;
+        if (!token) {
+            return res.status(403).json({
+                msg: "unauthorized user!!"
+            });
+        }
+        const secret = process.env.JWT_SECRET;
+        const payload = jsonwebtoken_1.default.verify(token, secret);
+        const userIdString = typeof payload === "string" ? payload : payload.userId;
+        const userId = Number(userIdString);
+        if (Number.isNaN(userId)) {
+            return res.status(400).json({ msg: "Invalid user id in token" });
+        }
+        const user = yield prisma.user.findUnique({
+            where: {
+                id: userId
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+            }
+        });
+        if (!user) {
+            return res.status(404).json({ msg: "User not found" });
+        }
+        return res.status(200).json({
+            user
+        });
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            msg: "Internal server error"
+        });
+    }
+});
+exports.currentUser = currentUser;
+const logOut = (req, res) => {
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+        path: "/",
+    });
+    return res.status(200).json({
+        msg: "Logged out successfully",
+    });
+};
+exports.logOut = logOut;

@@ -37,7 +37,9 @@ export default function Login() {
     e.preventDefault();
     let response;
     try{
-      response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, loginData)
+      response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, loginData, {
+        withCredentials: true
+      })
       toast.success("Login successfully..", {
         position: "top-center"
       })

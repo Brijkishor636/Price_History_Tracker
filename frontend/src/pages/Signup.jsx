@@ -43,7 +43,9 @@ export default function Signup() {
     }
     let response;
     try{
-      response = await axios.post(`${BACKEND_URL}/api/v1/user/signup`, signupData);
+      response = await axios.post(`${BACKEND_URL}/api/v1/user/signup`, signupData,{
+        withCredentials: true
+      });
       toast.success("Signed up successfully...", {
         position: "top-center"
       })

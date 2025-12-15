@@ -35,13 +35,14 @@ export const signup = async (req: Request, res: Response) =>{
             })
             const secret = process.env.JWT_SECRET as Secret;
             const token = jwt.sign({userId: user.id}, secret, {expiresIn: '1h'});
-            res.cookie("token", token,{
-                httpOnly: true,
-                path: "/"
-            })
+            res.cookie("token", token, {
+              httpOnly: true,
+              secure: false,
+              sameSite: "lax",
+              maxAge: 24 * 60 * 60 * 1000,
+            });
             return res.status(201).json({
                 msg: "User created successfully..",
-                token
             })
         }
         catch(e){
@@ -87,11 +88,12 @@ export const signin = async (req: Request, res: Response) =>{
           const token = jwt.sign({ userId: userId}, secretKey, {expiresIn: "1h"});
           res.cookie("token", token, {
             httpOnly: true,
-            path: '/'
-          })
+            secure: false,
+            sameSite: "lax",
+            maxAge: 24 * 60 * 60 * 1000,
+          });
           return res.status(200).json({
             msg: "Login successfully..",
-            token
           })
       }
       catch(e){
@@ -101,3 +103,58 @@ export const signin = async (req: Request, res: Response) =>{
         return res.status(500).json({ msg: "Internal server error!!" });
       }
 }
+
+export const currentUser = async (req: Request, res: Response) =>{
+  try{
+    const token = req.cookies.token;
+    if(!token){
+      return res.status(403).json({
+        msg: "unauthorized user!!"
+      })
+    }
+    const secret = process.env.JWT_SECRET as Secret;
+    const payload = jwt.verify(token, secret) as { userId: string } | string;
+    const userIdString = typeof payload === "string" ? payload : payload.userId;
+    const userId = Number(userIdString);
+    if (Number.isNaN(userId)) {
+      return res.status(400).json({ msg: "Invalid user id in token" });
+    }
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      }
+    });
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+    return res.status(200).json({
+      user
+    })
+  }
+  catch(e){
+    console.log(e);
+    return res.status(500).json({
+      msg: "Internal server error"
+    })
+  }
+  
+}
+
+
+export const logOut = (req: Request, res: Response) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+    path: "/",
+  });
+
+  return res.status(200).json({
+    msg: "Logged out successfully",
+  });
+};

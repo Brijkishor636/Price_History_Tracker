@@ -1,6 +1,6 @@
 export default function AboutSection() {
   return (
-    <section className="w-full bg-linear-to-b from-[#0a1a3f] via-[#243779] to-[#0a1a3f] text-white rounded-2xl shadow-xl p-8 border border-blue-800">
+    <section className="w-full bg-linear-to-b from-[#0a1a3f] via-[#26397d] to-[#0a1a3f] text-white rounded-2xl shadow-xl p-8 border border-blue-800">
       <div className="max-w-5xl mx-auto space-y-10">
         <h2 className="text-3xl font-bold mb-6 text-center">About Price Tracker App</h2>
 

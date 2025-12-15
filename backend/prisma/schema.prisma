@@ -12,6 +12,24 @@ model User {
   name     String?
   email    String  @unique
   password String
+  accounts    OAuthAccount[]
+
+  @@map("users")
+}
+
+model OAuthAccount {
+  id            Int       @id @default(autoincrement())
+  provider      String    
+  providerId    String    
+  accessToken   String?
+  refreshToken  String?
+  userId        Int
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([provider, providerId])
+  @@map("oauth_accounts")
 }
 
 model Product {
@@ -31,3 +49,4 @@ model PriceHistory {
   date      DateTime
   product   Product  @relation(fields: [productId], references: [id])
 }
+

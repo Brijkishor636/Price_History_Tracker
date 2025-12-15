@@ -8,4 +8,6 @@ const userController_1 = require("../controller/userController");
 const userRouter = express_1.default.Router();
 userRouter.post("/signup", (req, res) => (0, userController_1.signup)(req, res));
 userRouter.post("/signin", (req, res) => (0, userController_1.signin)(req, res));
+userRouter.get("/current", (req, res) => (0, userController_1.currentUser)(req, res));
+userRouter.post("/logout", (req, res) => (0, userController_1.logOut)(req, res));
 exports.default = userRouter;

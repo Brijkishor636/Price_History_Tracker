@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import Dashboard from "./pages/Dashboard"
 import MainLayout from "./layouts/mainLayout"
+import ProtectedRoutes from "./util/protectedRoutes"
 
 
 function App() {
@@ -11,7 +12,9 @@ function App() {
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/dashboard" element={<Dashboard/>}/>
+        </Route>
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Route>
