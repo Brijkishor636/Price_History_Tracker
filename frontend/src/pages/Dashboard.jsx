@@ -31,7 +31,7 @@ export default function Dashboard() {
     }
     catch(e){
       console.log(e);
-      toast.error("internal error!!", {
+      toast.error("Hi, internal error!!", {
         position: "top-right"
       })
     }
