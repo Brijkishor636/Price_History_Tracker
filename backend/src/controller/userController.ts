@@ -46,8 +46,8 @@ export const signup = async (req: Request, res: Response) => {
 
     res.clearCookie("token", {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       path: "/",
     });
 
@@ -59,8 +59,8 @@ export const signup = async (req: Request, res: Response) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 60 * 60 * 1000,
       path: "/",
     });
@@ -118,8 +118,8 @@ export const signin = async (req: Request, res: Response) => {
 
     res.clearCookie("token", {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       path: "/",
     });
 
@@ -131,8 +131,8 @@ export const signin = async (req: Request, res: Response) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 60 * 60 * 1000,
       path: "/",
     });
@@ -185,8 +185,8 @@ export const currentUser = async (req: Request, res: Response) =>{
   if (e instanceof jwt.TokenExpiredError) {
     res.clearCookie("token", {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       path: "/",
     });
 
@@ -203,8 +203,8 @@ export const currentUser = async (req: Request, res: Response) =>{
 export const logOut = (req: Request, res: Response) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
+    secure: true,
+    sameSite: "none",
     path: "/",
   });
 
