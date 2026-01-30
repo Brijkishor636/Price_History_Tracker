@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebaseConfigurations/config";
+// import { signOut } from "firebase/auth";
+// import { auth } from "../firebaseConfigurations/config";
 import VivoPriceTracker from "../components/VivoPriceTracker";
 import { UserContext } from "../context/userContext.jsx"
 import axios from "axios";
