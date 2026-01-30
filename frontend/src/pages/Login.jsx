@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider, githubProvider } from "../firebaseConfigurations/config";
 import axios from "axios"
 import { toast } from "react-toastify";
+import { UserContext } from "../context/userContext";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function Login() {
     email: "",
     password: ""
   });
+  const { user, setUser } = useContext(UserContext);
 
   async function signInWithGoogle() {
     try {
@@ -43,6 +45,7 @@ export default function Login() {
       toast.success("Login successfully..", {
         position: "top-center"
       })
+      setUser(user);
       navigate("/dashboard")
     }
     catch(e){

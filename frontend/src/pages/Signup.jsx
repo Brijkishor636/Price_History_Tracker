@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { signInWithPopup } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth, googleProvider, githubProvider } from '../firebaseConfigurations/config';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { UserContext } from '../context/userContext';
 
 export default function Signup() {
   const navigate = useNavigate();
+  const {user, setUser} = useContext(UserContext);
 
   const [signupData, setSignupData] = useState({
     name: "",
@@ -49,6 +51,7 @@ export default function Signup() {
       toast.success("Signed up successfully...", {
         position: "top-center"
       })
+      setUser(user);
       navigate("/dashboard");
     }
     catch(e){
