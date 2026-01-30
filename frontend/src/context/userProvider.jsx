@@ -7,13 +7,16 @@ export default function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const url = import.meta.env.VITE_BACKEND_URL;
+  // console.log(url);
+
   useEffect(() => {
     async function fetchCurrentUser() {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/user/current", {
+        const res = await axios.get(`${url}/api/v1/user/current`, {
           withCredentials: true
         });
-
+        // console.log(res);
         setUser(res.data.user || null);
       } catch (err) {
         console.error("Error fetching user:", err);

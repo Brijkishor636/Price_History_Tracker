@@ -1,12 +1,20 @@
 import { useState } from "react";
+import { useProductSearch } from "../../hooks/useProductSearch";
 import { Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
+  const { searchProduct } = useProductSearch();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Searching for:", query);
+     if (!query.trim()) 
+        return alert("Input required");
+    await searchProduct(query);
+    navigate("/dashboard");
+    // console.log("Searching for:", query);
   };
 
   return (

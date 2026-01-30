@@ -39,7 +39,7 @@ export const signup = async (req: Request, res: Response) =>{
               httpOnly: true,
               secure: false,
               sameSite: "lax",
-              maxAge: 24 * 60 * 60 * 1000,
+              maxAge: 60 * 60 * 1000,
             });
             return res.status(201).json({
                 msg: "User created successfully..",
@@ -90,13 +90,14 @@ export const signin = async (req: Request, res: Response) =>{
             httpOnly: true,
             secure: false,
             sameSite: "lax",
-            maxAge: 24 * 60 * 60 * 1000,
+            maxAge: 60 * 60 * 1000,
           });
           return res.status(200).json({
             msg: "Login successfully..",
           })
       }
       catch(e){
+        console.log(e);
         if (e instanceof jwt.TokenExpiredError) {
         return res.status(401).json({ msg: "Token expired, please login again" });
         }

@@ -6,6 +6,7 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import UserProvider from './context/userProvider.jsx'
+import ProductProvider from './context/productProvider.jsx'
 
 const clientId = import.meta.env.VITE_CLIENT_ID;
 // console.log(clientId); 
@@ -13,12 +14,14 @@ const clientId = import.meta.env.VITE_CLIENT_ID;
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <UserProvider>
+      <ProductProvider>
     <BrowserRouter>
       <ToastContainer />
       <GoogleOAuthProvider clientId={clientId}>
         <App />
       </GoogleOAuthProvider>
     </BrowserRouter>
+    </ProductProvider>
     </UserProvider>
   </StrictMode>,
 )

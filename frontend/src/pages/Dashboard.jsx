@@ -5,10 +5,11 @@ import VivoPriceTracker from "../components/VivoPriceTracker";
 import { UserContext } from "../context/userContext.jsx"
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   // const [user, setUser] = useState(null);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -22,12 +23,14 @@ export default function Dashboard() {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   async function logout() {
     try{
-      const response = await axios.post(`${BACKEND_URL}/api/v1/user/logout`, {
+      const response = await axios.post(`${BACKEND_URL}/api/v1/user/logout`, {}, {
       withCredentials: true
     })
+    context.setUser(null);
     toast.success(response.data.msg,{
       position: "top-center"
     })
+    navigate("/");
     }
     catch(e){
       console.log(e);
@@ -44,7 +47,7 @@ export default function Dashboard() {
         </div>
 
     <div className="text-xl font-bold p-10">
-      {console.log(context)}
+      {/* {console.log(context)} */}
       {context.user ? (
         <>
           <p>email :- {context.user?.email}</p>

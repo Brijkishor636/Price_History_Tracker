@@ -51,7 +51,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             httpOnly: true,
             secure: false,
             sameSite: "lax",
-            maxAge: 24 * 60 * 60 * 1000,
+            maxAge: 60 * 60 * 1000,
         });
         return res.status(201).json({
             msg: "User created successfully..",
@@ -100,13 +100,14 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             httpOnly: true,
             secure: false,
             sameSite: "lax",
-            maxAge: 24 * 60 * 60 * 1000,
+            maxAge: 60 * 60 * 1000,
         });
         return res.status(200).json({
             msg: "Login successfully..",
         });
     }
     catch (e) {
+        console.log(e);
         if (e instanceof jsonwebtoken_1.default.TokenExpiredError) {
             return res.status(401).json({ msg: "Token expired, please login again" });
         }
