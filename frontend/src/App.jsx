@@ -4,7 +4,7 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import Dashboard from "./pages/Dashboard"
 import MainLayout from "./layouts/MainLayout"
-import ProtectedRoutes from "./util/protectedRoutes"
+import ProtectedRoutes from "./util/ProtectedRoutes"
 
 
 function App() {
