@@ -1,7 +1,6 @@
-
 import AboutSection from "../components/Home/AboutSection";
 import ActionSection from "../components/Home/ActionSection";
-import MainDealsAndDrops from "../components/Home/MainDealsandDrops";
+import MainDealsAndDrops from "../components/Home/MainDealsAndDrops";
 import SearchBar from "../components/Home/SearchBar";
 import TestimonialSection from "../components/Home/TestimonialSection";
 import TrendingDeals from "../components/Home/TrendingDeals";

@@ -1,10 +1,10 @@
-import { Routes, Route} from "react-router-dom"
-import Home from "./pages/Home"
-import Login from "./pages/Login"
-import Signup from "./pages/Signup"
-import Dashboard from "./pages/Dashboard"
-import MainLayout from "./layouts/MainLayout"
-import ProtectedRoutes from "./util/ProtectedRoutes"
+import { Routes, Route} from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
+import MainLayout from "./layouts/MainLayout";
+import ProtectedRoutes from "./util/ProtectedRoutes";
 
 
 function App() {
